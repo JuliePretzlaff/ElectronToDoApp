@@ -13,13 +13,31 @@ app.on('ready', () => {
 });
 
 const menuTemplate = [
-  { label: '' },
   {
     label: 'File',
     submenu: [
       {
         label: 'New To Do'
+      },
+      {
+        label: 'Quit',
+        // accelerator: 'Command+Q',
+        // accelerator: (() => {
+        //   if (process.platform === 'darwin') {
+        //     return 'Command+Q';
+        //   } else {
+        //     return 'Ctrl+Q';
+        //   }
+        // })(),
+        accelerator: process.platform === 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+        click() {
+          app.quit();
+        }
       }
     ]
   }
 ];
+
+if (process.platform === 'darwin') {
+  menuTemplate.unshift({ label: '' });
+}
